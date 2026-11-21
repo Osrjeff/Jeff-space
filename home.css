@@ -1,0 +1,206 @@
+body {
+    background-image: linear-gradient(black, rgb(99, 99, 99));
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Remove o overflow: hidden no mobile caso queira scroll, ou mantém se quiser tudo travado */
+    overflow-x: hidden; 
+}
+
+/* ==================== JANELA ESTILO WINDOWS ==================== */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Base comum para todas as janelas */
+.janela1, .janela_exit {
+    position: fixed;
+    background-color: #c0c0c0; 
+    width: 90%;          /* CORREÇÃO: Usa porcentagem para caber em qualquer celular */
+    max-width: 450px;    /* Não passa do tamanho original em telas grandes */
+    box-sizing: border-box; /* Garante que padding e bordas não estorem a largura */
+    padding: 3px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    box-shadow: 1px 1px 0px 0px #000;
+    animation: surgirJanela 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.janela1 {
+    height: 100px;
+}
+
+.janela_exit {
+    height: 150px;
+    /* Centraliza perfeitamente no meio da tela independente do dispositivo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* Garante que fica por cima das outras */
+}
+
+/* Posiciona o botão bem no centro da janela cinza */
+.tituloitem2 {
+    font-family: tahoma;
+    position: absolute;
+    top: 50px; /* Coloca o botão abaixo da barra azul */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza na horizontal perfeitamente */
+    width: 200px;
+    height: 60px;
+}
+
+/* Força o estilo do botão verde com !important */
+.button_exit {
+    width: 100%;
+    height: 100%;
+    font-family: tahoma !important;
+    font-size: 14px !important;
+    padding: 6px 30px !important;
+    cursor: pointer !important;
+    color: #ffffff !important; /* Texto branco */
+    
+    /* DEFINIÇÃO DO VERDE RETRÔ */
+    background: #228b22 !important; 
+    
+    /* Bordas 3D do Windows Antigo adaptadas para o verde */
+    border-top: 2px solid #98fb98 !important;   /* Luz no topo */
+    border-left: 2px solid #98fb98 !important;  /* Luz na esquerda */
+    border-right: 2px solid #004d00 !important; /* Sombra na direita */
+    border-bottom: 2px solid #004d00 !important;/* Sombra embaixo */
+    box-shadow: 1px 1px 0px 0px #000 !important; /* Linha preta final */
+}
+
+/* Efeito de clique (afundar o botão) */
+.button_exit:active {
+    border-top: 2px solid #004d00 !important;
+    border-left: 2px solid #004d00 !important;
+    border-right: 2px solid #98fb98 !important;
+    border-bottom: 2px solid #98fb98 !important;
+}
+
+
+
+
+/* CLASSES DE POSICIONAMENTO PARA TELAS GRANDES */
+.topo-esquerdo   { top: 20px; left: 20px; }
+.topo-direito    { top: 20px; right: 20px; }
+.baixo-esquerdo  { bottom: 20px; left: 20px; }
+.baixo-direito   { bottom: 20px; right: 20px; }
+.lateral-esquerda { top: calc(50% - 50px); left: 20px; }
+.lateral-direita  { top: calc(50% - 50px); right: 20px; }
+
+.titulo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%; /* Ajusta automaticamente ao tamanho da janela */
+    height: 20px;
+    font-family: tahoma;
+    background-color: #000080;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.titulotext {
+     font-family: tahoma;
+     font-size: 12px;
+     margin: 0;
+}
+
+/* Texto interno da Janela */
+.tituloitem {
+    font-family: tahoma;
+    position: absolute;
+    top: 35px; /* Evita ficar colado/atrás da barra azul */
+    left: 0;
+    width: 100%;
+    text-align: center; /* Centraliza o texto/botão independente da largura */
+    font-size: 25px;
+    color: rgb(255, 0, 0);
+    text-shadow: 1px 1px 0px #000;
+}
+
+.tituloitem h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Botão estilizado retrô dentro da janela Exit */
+.janela_exit button {
+    font-family: tahoma;
+    font-size: 14px;
+    padding: 4px 25px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    box-shadow: 1px 1px 0px 0px #000;
+    cursor: pointer;
+}
+
+.janela_exit button:active {
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.buttons {
+    display: flex;
+    position: absolute;
+    width: 43px;
+    height: 18px;
+    right: 4px;
+    top: 1px;
+}
+
+/* Configuração dos passos da animação */
+@keyframes surgirJanela {
+    from {
+        opacity: 0;
+        transform: scale(0.5); 
+    }
+    to {
+        opacity: 1;
+        /* IMPORTANTE: Mantém a centralização da janela principal intacta se for ela */
+        transform: scale(1); 
+    }
+}
+/* Correção da animação específica para a janela do meio não perder a centralização */
+@keyframes surgirJanelaCentro {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.janela_exit {
+    animation: surgirJanelaCentro 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+
+/* ==================== REGRAS PARA TELAS PEQUENAS (CELULARES) ==================== */
+@media (max-width: 600px) {
+    /* Como a tela do celular é pequena, ocultamos as janelas laterais 
+       para não amontoar tudo em cima da janela de Exit principal */
+    .lateral-esquerda, .lateral-direita {
+        display: none;
+    }
+    
+    /* Reposiciona os erros dos cantos de forma que não fiquem colados no meio */
+    .topo-esquerdo   { top: 10px; left: 40px; }
+    .topo-direito    { top: 130px; left: -1px; } /* Joga um abaixo do outro na parte superior */
+    .baixo-esquerdo  { bottom: 130px; left: 7%; }
+    .baixo-direito   { bottom: 10px; left: 0px; }
+}
